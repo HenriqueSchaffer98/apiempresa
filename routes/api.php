@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\API\{AuthController, ClassroomController, SchoolController, StudentController};
+use App\Http\Controllers\API\{AuthController, ClassroomController, SchoolController, StudentController, EmpresaController, FuncionarioController, ClienteController};
 
 /*
 |--------------------------------------------------------------------------
@@ -46,4 +46,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('{id}', [ClassroomController::class, 'update']);
         Route::delete('{id}', [ClassroomController::class, 'remove']);
     });
+
+    Route::apiResource('empresas', EmpresaController::class);
+    Route::apiResource('funcionarios', FuncionarioController::class);
+    Route::apiResource('clientes', ClienteController::class);
 });
