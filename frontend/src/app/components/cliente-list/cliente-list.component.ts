@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ClienteService } from '../../services/cliente.service';
@@ -12,8 +12,8 @@ import { Cliente } from '../../models/models';
   styleUrl: './cliente-list.component.css'
 })
 export class ClienteListComponent implements OnInit {
-  clientes: Cliente[] = [];
-  loading = true;
+  clientes = signal<Cliente[]>([]);
+  loading = signal(true);
 
   constructor(private clienteService: ClienteService) {}
 
@@ -22,13 +22,13 @@ export class ClienteListComponent implements OnInit {
   }
 
   loadClientes() {
-    this.loading = true;
+    this.loading.set(true);
     this.clienteService.getAll().subscribe({
       next: (response) => {
-        this.clientes = response.data;
-        this.loading = false;
+        this.clientes.set(response.data);
+        this.loading.set(false);
       },
-      error: () => this.loading = false
+      error: () => this.loading.set(false)
     });
   }
 

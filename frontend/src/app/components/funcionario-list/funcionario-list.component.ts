@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FuncionarioService } from '../../services/funcionario.service';
@@ -12,8 +12,8 @@ import { Funcionario } from '../../models/models';
   styleUrl: './funcionario-list.component.css'
 })
 export class FuncionarioListComponent implements OnInit {
-  funcionarios: Funcionario[] = [];
-  loading = true;
+  funcionarios = signal<Funcionario[]>([]);
+  loading = signal(true);
 
   constructor(private funcionarioService: FuncionarioService) {}
 
@@ -22,13 +22,13 @@ export class FuncionarioListComponent implements OnInit {
   }
 
   loadFuncionarios() {
-    this.loading = true;
+    this.loading.set(true);
     this.funcionarioService.getAll().subscribe({
       next: (response) => {
-        this.funcionarios = response.data;
-        this.loading = false;
+        this.funcionarios.set(response.data);
+        this.loading.set(false);
       },
-      error: () => this.loading = false
+      error: () => this.loading.set(false)
     });
   }
 

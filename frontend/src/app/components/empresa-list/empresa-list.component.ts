@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { EmpresaService } from '../../services/empresa.service';
@@ -12,8 +12,8 @@ import { Empresa } from '../../models/models';
   styleUrl: './empresa-list.component.css'
 })
 export class EmpresaListComponent implements OnInit {
-  empresas: Empresa[] = [];
-  loading = true;
+  empresas = signal<Empresa[]>([]);
+  loading = signal(true);
 
   constructor(private empresaService: EmpresaService) {}
 
@@ -22,13 +22,13 @@ export class EmpresaListComponent implements OnInit {
   }
 
   loadEmpresas() {
-    this.loading = true;
+    this.loading.set(true);
     this.empresaService.getAll().subscribe({
       next: (response) => {
-        this.empresas = response.data;
-        this.loading = false;
+        this.empresas.set(response.data);
+        this.loading.set(false);
       },
-      error: () => this.loading = false
+      error: () => this.loading.set(false)
     });
   }
 

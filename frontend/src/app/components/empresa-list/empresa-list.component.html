@@ -1,36 +1,40 @@
-<div class="page-header">
-  <h2>Empresas</h2>
-  <button routerLink="/empresas/novo" class="btn-primary">Nova Empresa</button>
-</div>
+<div class="page-container fade-in">
+  <div class="page-header">
+    <h2>Empresas</h2>
+    <button routerLink="/empresas/novo" class="btn-primary">Nova Empresa</button>
+  </div>
 
-<div class="glass-card table-container">
-  <div *ngIf="loading" class="loading">Carregando...</div>
-  
-  <table *ngIf="!loading">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>CNPJ</th>
-        <th>Endereço</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let empresa of empresas">
-        <td>{{ empresa.id }}</td>
-        <td>{{ empresa.nome }}</td>
-        <td>{{ empresa.cnpj }}</td>
-        <td>{{ empresa.endereco }}</td>
-        <td class="actions">
-          <button [routerLink]="['/empresas/editar', empresa.id]" class="btn-edit">Editar</button>
-          <button (click)="deleteEmpresa(empresa.id!)" class="btn-delete">Excluir</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-container glass-card">
+    <div *ngIf="loading()" class="loading">
+      Carregando...
+    </div>
 
-  <div *ngIf="!loading && empresas.length === 0" class="empty-state">
-    Nenhuma empresa cadastrada.
+    <div *ngIf="!loading() && empresas().length === 0" class="empty-state">
+      Nenhuma empresa encontrada.
+    </div>
+
+    <table *ngIf="!loading() && empresas().length > 0" class="full-width-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>CNPJ</th>
+          <th>Endereço</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let empresa of empresas()">
+          <td>{{ empresa.id }}</td>
+          <td>{{ empresa.nome }}</td>
+          <td>{{ empresa.cnpj }}</td>
+          <td>{{ empresa.endereco }}</td>
+          <td class="actions">
+            <button [routerLink]="['/empresas/editar', empresa.id]" class="btn-edit">Editar</button>
+            <button (click)="deleteEmpresa(empresa.id!)" class="btn-delete">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

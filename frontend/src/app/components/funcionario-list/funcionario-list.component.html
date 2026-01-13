@@ -1,36 +1,40 @@
-<div class="page-header">
-  <h2>Funcionários</h2>
-  <button routerLink="/funcionarios/novo" class="btn-primary">Novo Funcionário</button>
-</div>
+<div class="page-container fade-in">
+  <div class="page-header">
+    <h2>Funcionários</h2>
+    <button routerLink="/funcionarios/novo" class="btn-primary">Novo Funcionário</button>
+  </div>
 
-<div class="glass-card table-container">
-  <div *ngIf="loading" class="loading">Carregando...</div>
-  
-  <table *ngIf="!loading">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>Login</th>
-        <th>E-mail</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let f of funcionarios">
-        <td>{{ f.id }}</td>
-        <td>{{ f.nome }}</td>
-        <td>{{ f.login }}</td>
-        <td>{{ f.email }}</td>
-        <td class="actions">
-          <button [routerLink]="['/funcionarios/editar', f.id]" class="btn-edit">Editar</button>
-          <button (click)="deleteFuncionario(f.id!)" class="btn-delete">Excluir</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-container glass-card">
+    <div *ngIf="loading()" class="loading">
+      Carregando...
+    </div>
 
-  <div *ngIf="!loading && funcionarios.length === 0" class="empty-state">
-    Nenhum funcionário cadastrado.
+    <div *ngIf="!loading() && funcionarios().length === 0" class="empty-state">
+      Nenhum funcionário encontrado.
+    </div>
+
+    <table *ngIf="!loading() && funcionarios().length > 0" class="full-width-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Login</th>
+          <th>E-mail</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let funcionario of funcionarios()">
+          <td>{{ funcionario.id }}</td>
+          <td>{{ funcionario.nome }}</td>
+          <td>{{ funcionario.login }}</td>
+          <td>{{ funcionario.email }}</td>
+          <td class="actions">
+            <button [routerLink]="['/funcionarios/editar', funcionario.id]" class="btn-edit">Editar</button>
+            <button (click)="deleteFuncionario(funcionario.id!)" class="btn-delete">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
