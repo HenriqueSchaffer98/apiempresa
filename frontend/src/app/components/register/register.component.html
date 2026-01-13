@@ -1,0 +1,48 @@
+<div class="register-container">
+  <div class="glass-card register-card">
+    <div class="brand">
+      <div class="logo-icon">R</div>
+      <h2>Nova Conta</h2>
+    </div>
+    <p class="subtitle">Cadastre-se para começar a gerenciar sua empresa</p>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>Nome Completo (sem acentuação)</label>
+        <input type="text" formControlName="name" placeholder="Seu Nome">
+        <div *ngIf="registerForm.get('name')?.errors?.['pattern']" class="error-msg">
+          Use apenas letras, números e espaços (sem acentuação).
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>E-mail Corporativo</label>
+        <input type="email" formControlName="email" placeholder="seu@empresa.com">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Senha</label>
+          <input type="password" formControlName="password" placeholder="******">
+        </div>
+        <div class="form-group">
+          <label>Confirmar</label>
+          <input type="password" formControlName="password_confirmation" placeholder="******">
+        </div>
+      </div>
+      
+      <div *ngIf="registerForm.hasError('mismatch') && registerForm.get('password_confirmation')?.touched" class="error-msg-box">
+        As senhas não coincidem.
+      </div>
+
+      <button type="submit" class="btn-primary" [disabled]="loading || registerForm.invalid">
+        <span *ngIf="!loading">Criar Conta</span>
+        <span *ngIf="loading">Processando...</span>
+      </button>
+
+      <div class="auth-footer">
+        Já tem uma conta? <a routerLink="/login">Faça Login</a>
+      </div>
+    </form>
+  </div>
+</div>

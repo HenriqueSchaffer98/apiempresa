@@ -7,8 +7,32 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\{Request, Response};
 
+use App\Http\Requests\RegisterRequest;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
 class AuthController extends Controller
 {
+    /**
+     * Register a new user.
+     */
+    public function register(RegisterRequest $request)
+    {
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        $token = $user->createToken('auth-token');
+
+        return response()->json([
+            'access_token' => $token->plainTextToken,
+            'token_type' => 'Bearer',
+            'user' => $user
+        ], Response::HTTP_CREATED);
+    }
+
     /**
      * Authenticate a user and generate an authentication token.
      */
@@ -20,9 +44,13 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            $token = $request->user()->createToken('mobile-token');
+            $token = $request->user()->createToken('auth-token');
 
-            return ['token' => $token->plainTextToken];
+            return [
+                'access_token' => $token->plainTextToken,
+                'token_type' => 'Bearer',
+                'user' => $request->user()
+            ];
         }
 
         return response()->json([

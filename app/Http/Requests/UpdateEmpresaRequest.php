@@ -14,7 +14,7 @@ class UpdateEmpresaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome' => 'sometimes|string|max:255',
+            'nome' => 'sometimes|string|max:255|regex:/^[a-zA-Z0-9\s]+$/',
             'cnpj' => 'sometimes|string|max:18|unique:empresas,cnpj,' . $this->route('id'),
             'endereco' => 'sometimes|string|max:255',
         ];

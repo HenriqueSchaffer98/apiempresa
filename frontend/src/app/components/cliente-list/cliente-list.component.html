@@ -1,0 +1,36 @@
+<div class="page-header">
+  <h2>Clientes</h2>
+  <button routerLink="/clientes/novo" class="btn-primary">Novo Cliente</button>
+</div>
+
+<div class="glass-card table-container">
+  <div *ngIf="loading" class="loading">Carregando...</div>
+  
+  <table *ngIf="!loading">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Login</th>
+        <th>E-mail</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of clientes">
+        <td>{{ c.id }}</td>
+        <td>{{ c.nome }}</td>
+        <td>{{ c.login }}</td>
+        <td>{{ c.email }}</td>
+        <td class="actions">
+          <button [routerLink]="['/clientes/editar', c.id]" class="btn-edit">Editar</button>
+          <button (click)="deleteCliente(c.id!)" class="btn-delete">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!loading && clientes.length === 0" class="empty-state">
+    Nenhum cliente cadastrado.
+  </div>
+</div>

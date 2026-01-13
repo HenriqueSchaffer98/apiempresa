@@ -1,0 +1,34 @@
+<div class="login-container">
+  <div class="glass-card login-card">
+    <div class="brand">
+      <div class="logo-icon">E</div>
+      <h2>Empresa Manager</h2>
+    </div>
+    <p class="subtitle">Acesse sua conta para gerenciar dados</p>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>E-mail</label>
+        <div class="input-wrapper">
+          <input type="email" formControlName="email" placeholder="seu@email.com">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Senha</label>
+        <div class="input-wrapper">
+          <input type="password" formControlName="password" placeholder="******">
+        </div>
+      </div>
+
+      <button type="submit" class="btn-primary" [disabled]="loading || loginForm.invalid">
+        <span *ngIf="!loading">Entrar</span>
+        <span *ngIf="loading">Autenticando...</span>
+      </button>
+
+      <div class="auth-footer">
+        Não tem uma conta? <a routerLink="/register">Cadastre-se</a>
+      </div>
+    </form>
+  </div>
+</div>

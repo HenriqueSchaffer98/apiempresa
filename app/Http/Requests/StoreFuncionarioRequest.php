@@ -14,8 +14,8 @@ class StoreFuncionarioRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'login' => 'required|string|unique:funcionarios,login|max:255',
-            'nome' => 'required|string|max:255',
+            'login' => 'required|string|unique:funcionarios,login|max:255|regex:/^[a-zA-Z0-9]+$/',
+            'nome' => 'required|string|max:255|regex:/^[a-zA-Z0-9\s]+$/',
             'cpf' => 'required|string|unique:funcionarios,cpf|max:14',
             'email' => 'required|email|unique:funcionarios,email|max:255',
             'endereco' => 'required|string|max:255',

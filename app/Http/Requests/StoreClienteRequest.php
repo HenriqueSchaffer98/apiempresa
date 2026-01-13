@@ -14,8 +14,8 @@ class StoreClienteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'login' => 'required|string|unique:clientes,login|max:255',
-            'nome' => 'required|string|max:255',
+            'login' => 'required|string|unique:clientes,login|max:255|regex:/^[a-zA-Z0-9]+$/',
+            'nome' => 'required|string|max:255|regex:/^[a-zA-Z0-9\s]+$/',
             'cpf' => 'required|string|unique:clientes,cpf|max:14',
             'email' => 'required|email|unique:clientes,email|max:255',
             'endereco' => 'required|string|max:255',

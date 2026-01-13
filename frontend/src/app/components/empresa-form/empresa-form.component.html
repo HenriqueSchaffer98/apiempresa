@@ -1,0 +1,32 @@
+<div class="page-header">
+  <h2>{{ isEdit ? 'Editar Empresa' : 'Nova Empresa' }}</h2>
+</div>
+
+<div class="glass-card form-container">
+  <form [formGroup]="empresaForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Nome (sem acentuação)</label>
+      <input type="text" formControlName="nome" placeholder="Ex: Tech Solutions">
+      <div *ngIf="empresaForm.get('nome')?.errors?.['pattern']" class="error-msg">
+        O nome não deve conter acentuação ou caracteres especiais.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>CNPJ</label>
+      <input type="text" formControlName="cnpj" placeholder="00.000.000/0000-00">
+    </div>
+
+    <div class="form-group">
+      <label>Endereço</label>
+      <input type="text" formControlName="endereco" placeholder="Rua exemplo, 123">
+    </div>
+
+    <div class="form-actions">
+      <button type="button" routerLink="/empresas" class="btn-secondary">Cancelar</button>
+      <button type="submit" class="btn-primary" [disabled]="loading || empresaForm.invalid">
+        {{ loading ? 'Salvando...' : 'Salvar' }}
+      </button>
+    </div>
+  </form>
+</div>

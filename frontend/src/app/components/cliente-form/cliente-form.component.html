@@ -1,0 +1,51 @@
+<div class="page-header">
+  <h2>{{ isEdit ? 'Editar Cliente' : 'Novo Cliente' }}</h2>
+</div>
+
+<div class="glass-card form-container">
+  <form [formGroup]="clienteForm" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+      <div class="form-group">
+        <label>Nome (sem acentuação)</label>
+        <input type="text" formControlName="nome">
+      </div>
+      <div class="form-group">
+        <label>Login (sem acentuação)</label>
+        <input type="text" formControlName="login">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>CPF</label>
+        <input type="text" formControlName="cpf">
+      </div>
+      <div class="form-group">
+        <label>E-mail</label>
+        <input type="email" formControlName="email">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Endereço</label>
+      <input type="text" formControlName="endereco">
+    </div>
+
+    <div class="form-group">
+      <label>Senha {{ isEdit ? '(deixe em branco para manter)' : '' }}</label>
+      <input type="password" formControlName="senha">
+    </div>
+
+    <div class="form-group">
+      <label>Documento (PDF/JPG)</label>
+      <input type="file" (change)="onFileSelected($event)">
+    </div>
+
+    <div class="form-actions">
+      <button type="button" routerLink="/clientes" class="btn-secondary">Cancelar</button>
+      <button type="submit" class="btn-primary" [disabled]="loading || clienteForm.invalid">
+        {{ loading ? 'Salvando...' : 'Salvar' }}
+      </button>
+    </div>
+  </form>
+</div>
