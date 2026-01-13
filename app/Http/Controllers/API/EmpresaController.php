@@ -21,19 +21,18 @@ class EmpresaController extends Controller
      *      security={{"sanctum":{}}},
      *      @OA\Response(
      *          response=200,
-     *          description="Operação realizada com sucesso",
-     *       ),
+     *          description="Operação realizada com sucesso"
+     *      ),
      *      @OA\Response(
      *          response=401,
-     *          description="Não autenticado",
+     *          description="Não autenticado"
      *      ),
      *      @OA\Response(
      *          response=403,
      *          description="Acesso proibido"
      *      )
-     *     )
-     */
-    /**
+     * )
+     *
      * Lista todas as empresas com paginação.
      */
     public function index()
