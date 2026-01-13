@@ -122,4 +122,4 @@ Realiza o onboarding de um novo cliente, incluindo persistência de documentos c
 *   **Serviços Backend:** Laravel 10 (PHP 8.2).
 *   **Interface Frontend:** Angular 17 (Arquitetura baseada em Signals e Reactive Forms).
 *   **Provisionamento:** Docker & Nginx.
-*   **Documentação:** Especificação OpenAPI via L5-Swagger.
+*   **Documentação:** Especificação OpenAPI via L5-Swagger. (http://localhost:8000/api/documentation)
