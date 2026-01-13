@@ -13,12 +13,14 @@ use Illuminate\Support\Facades\Storage;
 
 class ClienteController extends Controller
 {
+     // Lista todos os clientes com paginação.
     public function index()
     {
         $clientes = Cliente::paginate(15);
         return ClienteResource::collection($clientes);
     }
 
+    // Cadastra um novo cliente, tratando senha e upload de documento.
     public function store(StoreClienteRequest $request)
     {
         $data = $request->validated();
@@ -41,6 +43,7 @@ class ClienteController extends Controller
         ], Response::HTTP_CREATED);
     }
 
+    // Exibe os detalhes de um cliente específico e suas empresas vinculadas.
     public function show($id)
     {
         $cliente = Cliente::with('empresas')->find($id);
@@ -52,6 +55,7 @@ class ClienteController extends Controller
         return new ClienteResource($cliente);
     }
 
+    // Atualiza os dados de um cliente, incluindo senha e documento se fornecidos.
     public function update(UpdateClienteRequest $request, $id)
     {
         $cliente = Cliente::find($id);
@@ -86,6 +90,7 @@ class ClienteController extends Controller
         ], Response::HTTP_OK);
     }
 
+    //Remove um cliente do sistema e deleta seu documento físico.
     public function destroy($id)
     {
         $cliente = Cliente::find($id);

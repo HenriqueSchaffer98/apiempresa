@@ -10,6 +10,9 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
+/**
+ * Componente principal do painel de controle (layout com menu e rotas filhas).
+ */
 export class DashboardComponent {
   private authService = inject(AuthService);
   private router = inject(Router);

@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Cliente } from '../models/models';
 
+/**
+ * Serviço para gerenciar operações de Clientes via API.
+ */
 @Injectable({
   providedIn: 'root'
 })

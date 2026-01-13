@@ -11,6 +11,9 @@ import { EmpresaService } from '../../services/empresa.service';
   templateUrl: './empresa-form.component.html',
   styleUrl: './empresa-form.component.css'
 })
+/**
+ * Componente para criar ou editar os dados de uma empresa.
+ */
 export class EmpresaFormComponent implements OnInit {
   empresaForm: FormGroup;
   isEdit = false;

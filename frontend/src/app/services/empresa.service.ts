@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Empresa } from '../models/models';
 
+/**
+ * Serviço para gerenciar operações de Empresas via API.
+ */
 @Injectable({
   providedIn: 'root'
 })

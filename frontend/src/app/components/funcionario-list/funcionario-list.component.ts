@@ -11,6 +11,9 @@ import { Funcionario } from '../../models/models';
   templateUrl: './funcionario-list.component.html',
   styleUrl: './funcionario-list.component.css'
 })
+/**
+ * Componente para listar os funcionários cadastrados.
+ */
 export class FuncionarioListComponent implements OnInit {
   funcionarios = signal<Funcionario[]>([]);
   loading = signal(true);

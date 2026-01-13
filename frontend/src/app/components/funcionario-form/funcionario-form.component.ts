@@ -13,6 +13,9 @@ import { Empresa } from '../../models/models';
   templateUrl: './funcionario-form.component.html',
   styleUrl: './funcionario-form.component.css'
 })
+/**
+ * Componente para criar ou editar os dados de um funcionário.
+ */
 export class FuncionarioFormComponent implements OnInit {
   funcionarioForm: FormGroup;
   isEdit = false;

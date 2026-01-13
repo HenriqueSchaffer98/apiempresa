@@ -11,6 +11,9 @@ import { Cliente } from '../../models/models';
   templateUrl: './cliente-list.component.html',
   styleUrl: './cliente-list.component.css'
 })
+/**
+ * Componente para listar os clientes cadastrados.
+ */
 export class ClienteListComponent implements OnInit {
   clientes = signal<Cliente[]>([]);
   loading = signal(true);

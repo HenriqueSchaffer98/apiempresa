@@ -16,22 +16,25 @@ class EmpresaController extends Controller
      *      path="/api/empresas",
      *      operationId="getEmpresasList",
      *      tags={"Empresas"},
-     *      summary="Get list of registered companies",
-     *      description="Returns list of companies",
+     *      summary="Obtém a lista de empresas cadastradas",
+     *      description="Retorna uma lista paginada de empresas",
      *      security={{"sanctum":{}}},
      *      @OA\Response(
      *          response=200,
-     *          description="Successful operation",
+     *          description="Operação realizada com sucesso",
      *       ),
      *      @OA\Response(
      *          response=401,
-     *          description="Unauthenticated",
+     *          description="Não autenticado",
      *      ),
      *      @OA\Response(
      *          response=403,
-     *          description="Forbidden"
+     *          description="Acesso proibido"
      *      )
      *     )
+     */
+    /**
+     * Lista todas as empresas com paginação.
      */
     public function index()
     {
@@ -39,6 +42,9 @@ class EmpresaController extends Controller
         return EmpresaResource::collection($empresas);
     }
 
+    /**
+     * Cadastra uma nova empresa.
+     */
     public function store(StoreEmpresaRequest $request)
     {
         $empresa = Empresa::create($request->validated());
@@ -49,6 +55,9 @@ class EmpresaController extends Controller
         ], Response::HTTP_CREATED);
     }
 
+    /**
+     * Exibe os detalhes de uma empresa específica, incluindo funcionários e clientes.
+     */
     public function show($id)
     {
         $empresa = Empresa::with(['funcionarios', 'clientes'])->find($id);
@@ -60,6 +69,9 @@ class EmpresaController extends Controller
         return new EmpresaResource($empresa);
     }
 
+    /**
+     * Atualiza os dados de uma empresa existente.
+     */
     public function update(UpdateEmpresaRequest $request, $id)
     {
         $empresa = Empresa::find($id);
@@ -76,6 +88,9 @@ class EmpresaController extends Controller
         ], Response::HTTP_OK);
     }
 
+    /**
+     * Remove uma empresa do sistema.
+     */
     public function destroy($id)
     {
         $empresa = Empresa::find($id);

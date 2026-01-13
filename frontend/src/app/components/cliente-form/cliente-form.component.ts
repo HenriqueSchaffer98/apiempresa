@@ -11,6 +11,9 @@ import { ClienteService } from '../../services/cliente.service';
   templateUrl: './cliente-form.component.html',
   styleUrl: './cliente-form.component.css'
 })
+/**
+ * Componente para criar ou editar os dados de um cliente.
+ */
 export class ClienteFormComponent implements OnInit {
   clienteForm: FormGroup;
   isEdit = false;

@@ -7,23 +7,23 @@ use App\Http\Controllers\API\{AuthController, EmpresaController, FuncionarioCont
 
 /*
 |--------------------------------------------------------------------------
-| API Routes
+| Rotas da API
 |--------------------------------------------------------------------------
 |
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
+| Aqui é onde você pode registrar as rotas da API para sua aplicação.
+| Essas rotas são carregadas pelo RouteServiceProvider e todas elas
+| serão atribuídas ao grupo de middleware "api".
 |
 */
 
 /**
- * Public routes
+ * Rotas públicas
  */
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
 
 /**
- * Auth routes
+ * Rotas autenticadas
  */
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {

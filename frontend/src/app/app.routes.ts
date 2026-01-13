@@ -10,6 +10,9 @@ import { ClienteListComponent } from './components/cliente-list/cliente-list.com
 import { ClienteFormComponent } from './components/cliente-form/cliente-form.component';
 import { AuthGuard } from './guards/auth.guard';
 
+/**
+ * Definição das rotas da aplicação frontend.
+ */
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },

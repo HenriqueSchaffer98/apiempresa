@@ -11,6 +11,9 @@ import { Empresa } from '../../models/models';
   templateUrl: './empresa-list.component.html',
   styleUrl: './empresa-list.component.css'
 })
+/**
+ * Componente para listar as empresas cadastradas.
+ */
 export class EmpresaListComponent implements OnInit {
   empresas = signal<Empresa[]>([]);
   loading = signal(true);

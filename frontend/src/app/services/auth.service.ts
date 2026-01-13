@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, map, tap } from 'rxjs';
 import { AuthResponse } from '../models/models';
 
+/**
+ * Serviço responsável pela autenticação e gestão de sessão do usuário.
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -11,6 +14,7 @@ export class AuthService {
   private currentUserSubject = new BehaviorSubject<any>(null);
 
   constructor(private http: HttpClient) {
+    // Carrega o usuário do armazenamento local ao iniciar o serviço
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       this.currentUserSubject.next(JSON.parse(storedUser));

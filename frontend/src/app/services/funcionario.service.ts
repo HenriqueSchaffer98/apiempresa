@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Funcionario } from '../models/models';
 
+/**
+ * Serviço para gerenciar operações de Funcionários via API.
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -24,7 +27,7 @@ export class FuncionarioService {
   }
 
   update(id: number, data: FormData): Observable<any> {
-    // Laravel requires _method=PUT to handle multipart/form-data for updates
+    // O Laravel exige _method=PUT para processar multipart/form-data em atualizações
     data.append('_method', 'PUT');
     return this.http.post<any>(`${this.apiUrl}/${id}`, data);
   }

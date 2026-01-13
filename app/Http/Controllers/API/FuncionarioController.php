@@ -13,12 +13,18 @@ use Illuminate\Support\Facades\Storage;
 
 class FuncionarioController extends Controller
 {
+    /**
+     * Lista todos os funcionários com paginação.
+     */
     public function index()
     {
         $funcionarios = Funcionario::paginate(15);
         return FuncionarioResource::collection($funcionarios);
     }
 
+    /**
+     * Cadastra um novo funcionário, tratando senha e upload de documento.
+     */
     public function store(StoreFuncionarioRequest $request)
     {
         $data = $request->validated();
@@ -42,6 +48,9 @@ class FuncionarioController extends Controller
         ], Response::HTTP_CREATED);
     }
 
+    /**
+     * Exibe os detalhes de um funcionário específico e suas empresas.
+     */
     public function show($id)
     {
         $funcionario = Funcionario::with('empresas')->find($id);
@@ -53,6 +62,9 @@ class FuncionarioController extends Controller
         return new FuncionarioResource($funcionario);
     }
 
+    /**
+     * Atualiza os dados de um funcionário, tratando senha e documento se fornecidos.
+     */
     public function update(UpdateFuncionarioRequest $request, $id)
     {
         $funcionario = Funcionario::find($id);
@@ -88,6 +100,9 @@ class FuncionarioController extends Controller
         ], Response::HTTP_OK);
     }
 
+    /**
+     * Remove um funcionário do sistema e deleta seu arquivo de documento.
+     */
     public function destroy($id)
     {
         $funcionario = Funcionario::find($id);
