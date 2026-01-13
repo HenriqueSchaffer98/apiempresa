@@ -26,7 +26,7 @@ class AuthController extends Controller
         }
 
         return response()->json([
-            'error' => 'The provided credentials do not match our records.',
+            'error' => 'As credenciais fornecidas estão incorretas.',
         ], Response::HTTP_UNAUTHORIZED);
     }
 }

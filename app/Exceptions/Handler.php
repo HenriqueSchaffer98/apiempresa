@@ -26,5 +26,30 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+
+        // Ensure API requests always return JSON
+        $this->renderable(function (\Illuminate\Auth\AuthenticationException $e, $request) {
+            if ($request->is('api/*')) {
+                return response()->json([
+                    'error' => 'Acesso negado. Token não fornecido ou inválido.',
+                ], 401);
+            }
+        });
+
+        $this->renderable(function (\Symfony\Component\HttpKernel\Exception\NotFoundHttpException $e, $request) {
+            if ($request->is('api/*')) {
+                return response()->json([
+                    'error' => 'Recurso não encontrado.',
+                ], 404);
+            }
+        });
+
+        $this->renderable(function (\Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException $e, $request) {
+            if ($request->is('api/*')) {
+                return response()->json([
+                    'error' => 'Você não tem permissão para realizar esta ação.',
+                ], 403);
+            }
+        });
     }
 }
