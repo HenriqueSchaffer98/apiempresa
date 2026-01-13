@@ -10,11 +10,18 @@ if [ ! -f ".env" ]; then
     cp .env.example .env
 fi
 
-# Generate Application Key if not set
-if grep -q "APP_KEY=" .env && [ -z "$(grep "APP_KEY=base64" .env)" ]; then
-    echo "Generating application key..."
-    php artisan key:generate
+# Wait for DB to be ready
+echo "Waiting for database connection..."
+# Sourcing .env again just in case, though docker-compose should handle it
+if [ -f .env ]; then
+    export $(grep -v '^#' .env | xargs)
 fi
+
+until php -r "try { new PDO('mysql:host=' . getenv('DB_HOST') . ';port=' . getenv('DB_PORT') . ';dbname=' . getenv('DB_DATABASE'), getenv('DB_USERNAME'), getenv('DB_PASSWORD')); exit(0); } catch (Exception \$e) { exit(1); }"; do
+    echo "Database is unavailable or credentials missing - sleeping"
+    sleep 2
+done
+echo "Database is up!"
 
 # Run Migrations
 echo "Running migrations..."

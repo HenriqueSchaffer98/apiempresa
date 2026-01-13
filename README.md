@@ -116,6 +116,17 @@ Realiza o onboarding de um novo cliente, incluindo persistência de documentos c
 
 ---
 
+## Execução de Testes
+
+A aplicação utiliza o **PHPUnit** para a automação de testes. Para garantir a integridade dos fluxos de autenticação e das operações de CRUD, os testes podem ser executados dentro do container de aplicação:
+
+```bash
+# Execução de todos os testes da suite
+docker-compose exec app php artisan test
+```
+
+---
+
 ## Pilha Tecnológica
 
 *   **Camada de Dados:** MySQL 8.0.

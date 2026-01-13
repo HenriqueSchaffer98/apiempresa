@@ -1,12 +1,12 @@
 <?php
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class AuthControllerTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     /**
      * Run the auth controller login endpoint test.
@@ -23,7 +23,7 @@ class AuthControllerTest extends TestCase
             'password' => 'password',
         ]);
 
-        $response->assertStatus(200)->assertJsonStructure(['token']);
+        $response->assertStatus(200)->assertJsonStructure(['access_token']);
     }
 
     /**
@@ -36,7 +36,7 @@ class AuthControllerTest extends TestCase
             'password' => 'xpto',
         ]);
 
-        $response->assertStatus(401)->assertJson(['error' => 'The provided credentials do not match our records.']);
+        $response->assertStatus(401)->assertJson(['error' => 'As credenciais fornecidas estão incorretas.']);
     }
 
     /**
@@ -73,6 +73,6 @@ class AuthControllerTest extends TestCase
             'password' => 'password',
         ]);
 
-        $response->assertStatus(401)->assertJson(['error' => 'The provided credentials do not match our records.']);
+        $response->assertStatus(401)->assertJson(['error' => 'As credenciais fornecidas estão incorretas.']);
     }
 }
